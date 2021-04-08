@@ -12,13 +12,17 @@ public interface UserMapper {
 
     @Update("update user " +
             "set name = #{name}, " +
-            "password = #{password}, " +
             "email = #{email}, " +
             "birthday = #{birthday}, " +
             "space = #{space}, " +
             "sign = #{sign} " +
             "where id = #{id}")
-    int update(User user);
+    int updateInfo(User user);
+
+    @Update("update user " +
+            "set password = #{password} " +
+            "where id = #{id}")
+    int updatePassword(int id, String password);
 
     @Select("select * " +
             "from user " +

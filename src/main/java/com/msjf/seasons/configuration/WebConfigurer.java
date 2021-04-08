@@ -22,7 +22,8 @@ public class WebConfigurer implements WebMvcConfigurer {
                 "/oplogin",
                 "/img/**",
                 "/css/**",
-                "/js/**");
+                "/js/**",
+                "/photo/**");
     }
 
     @Override

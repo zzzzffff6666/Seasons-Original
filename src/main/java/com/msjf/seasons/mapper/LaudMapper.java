@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-public interface StoreMapper {
+public interface LaudMapper {
     @Insert("insert into " +
             "store(uid, wid) " +
             "values(#{uid}, #{wid})")
@@ -19,7 +19,7 @@ public interface StoreMapper {
     int delete(int uid, int wid);
 
     @Select("select count(*) " +
-            "from store " +
+            "from laud " +
             "where uid = #{uid} " +
             "and wid = #{wid}")
     int select(int uid, int wid);
