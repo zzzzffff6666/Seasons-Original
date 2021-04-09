@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class Work {
     private int id;
+    private String title;
     private String type;
     private Timestamp daytime;
     private int uid;
@@ -19,6 +20,14 @@ public class Work {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getType() {

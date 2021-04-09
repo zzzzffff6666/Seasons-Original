@@ -24,16 +24,10 @@ public class UserService {
     /**
      * 修改密码
      * @param id 用户ID
-     * @param oldP 旧密码
      * @param newP 新密码
-     * @return 是否成功
      */
-    public boolean updatePassword(int id, String oldP, String newP) {
-        if (userMapper.searchByID(id).getPassword().equals(oldP)) {
-            userMapper.updatePassword(id, newP);
-            return true;
-        }
-        return false;
+    public void updatePassword(int id, String newP) {
+        userMapper.updatePassword(id, newP);
     }
 
     /**

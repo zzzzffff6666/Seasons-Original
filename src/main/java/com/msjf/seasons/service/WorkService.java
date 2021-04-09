@@ -18,12 +18,21 @@ import java.util.List;
 
 @Service
 public class WorkService {
+
     @Resource
     private WorkMapper workMapper;
     @Resource
     private StoreMapper storeMapper;
     @Resource
     private LaudMapper laudMapper;
+
+    /**
+     * 获取未被举报的作品
+     * @return 作品列表
+     */
+    public List<Work> searchByState() {
+        return workMapper.searchByState(0);
+    }
 
     /**
      * 获取被举报的作品
@@ -184,6 +193,15 @@ public class WorkService {
     }
 
     /**
+     * 通过ID搜索作品
+     * @param id 作品ID
+     * @return 作品对象
+     */
+    public Work searchByID(int id) {
+        return workMapper.searchByID(id);
+    }
+
+    /**
      * 通过标签搜索作品
      * @param tag 作品标签
      * @return 作品列表
@@ -200,4 +218,5 @@ public class WorkService {
     public List<Work> searchByTitle(String title) {
         return workMapper.searchByTitle(title);
     }
+
 }

@@ -13,7 +13,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
+        if (session.getAttribute("type") != null) {
             // 已登录，放行。。
             return true;
         } else {

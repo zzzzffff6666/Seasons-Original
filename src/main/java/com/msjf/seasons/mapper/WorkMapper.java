@@ -23,32 +23,32 @@ public interface WorkMapper {
     @Update("update work " +
             "set title = #{title} " +
             "where id = #{id}")
-    int updateTitle(int id, String title);
+    void updateTitle(int id, String title);
 
     @Update("update work " +
             "set content = #{content} " +
             "where id = #{id}")
-    int updateContent(int id, String content);
+    void updateContent(int id, String content);
 
     @Update("update work " +
             "set tag = #{tag} " +
             "where id = #{id}")
-    int updateTag(int id, String tag);
+    void updateTag(int id, String tag);
 
     @Update("update work " +
             "set state = #{state} " +
             "where id = #{id}")
-    int updateState(int id, int state);
+    void updateState(int id, int state);
 
     @Update("update work " +
             "set laud = laud + #{num} " +
             "where id = #{id}")
-    int updateLaud(int id, int num);
+    void updateLaud(int id, int num);
 
     @Update("update work " +
             "set store = store + #{num} " +
             "where id = #{id}")
-    int updateStore(int id, int num);
+    void updateStore(int id, int num);
 
     @Select("select * " +
             "from work " +

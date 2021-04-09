@@ -4,8 +4,6 @@ import com.msjf.seasons.entity.Operator;
 import com.msjf.seasons.entity.User;
 import com.msjf.seasons.mapper.OperatorMapper;
 import com.msjf.seasons.mapper.UserMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,23 +15,36 @@ public class ConnectService {
     @Resource
     private UserMapper userMapper;
 
-    public boolean login(String name, String password) {
-        User u = userMapper.searchByName(name);
-        if (u == null) return false;
-        return u.getPassword().equals(password);
+    /**
+     * 查询用户
+     * @param name 用户名
+     * @return 用户对象
+     */
+    public User userSearch(String name) {
+        return userMapper.searchByName(name);
     }
 
-    public boolean opLogin(String name, String password) {
-        Operator op = operatorMapper.select(name);
-        if (op == null) return false;
-        return op.getPassword().equals(password);
+    /**
+     * 查询管理员
+     * @param name 管理员名称
+     * @return 管理员对象
+     */
+    public Operator opSearch(String name) {
+        return operatorMapper.select(name);
     }
 
-    public int register(String name, String password, String email) {
+    /**
+     * 用户注册
+     * @param name 用户名
+     * @param password 密码
+     * @param email 邮箱
+     * @return 是否成功
+     */
+    public boolean register(String name, String password, String email) {
         User u = new User();
         u.setName(name);
         u.setPassword(password);
         u.setEmail(email);
-        return userMapper.add(u);
+        return userMapper.add(u) == 1;
     }
 }
