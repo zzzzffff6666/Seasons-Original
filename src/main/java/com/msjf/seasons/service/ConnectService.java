@@ -4,6 +4,8 @@ import com.msjf.seasons.entity.Operator;
 import com.msjf.seasons.entity.User;
 import com.msjf.seasons.mapper.OperatorMapper;
 import com.msjf.seasons.mapper.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

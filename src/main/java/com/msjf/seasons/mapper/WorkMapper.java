@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface WorkMapper {
     @Insert("insert into " +
-            "work(type, daytime, uid, content, laud, store, tag, state) " +
-            "values(#{type}, #{daytime}, #{uid}, #{content}, #{laud}, #{store}, #{tag}, #{state})")
+            "work(title, type, daytime, uid, content, laud, store, tag, state) " +
+            "values(#{title}, #{type}, #{daytime}, #{uid}, #{content}, #{laud}, #{store}, #{tag}, #{state})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int add(Work work);
 
@@ -21,19 +21,14 @@ public interface WorkMapper {
     int deleteByUID(int uid);
 
     @Update("update work " +
+            "set title = #{title} " +
+            "where id = #{id}")
+    int updateTitle(int id, String title);
+
+    @Update("update work " +
             "set content = #{content} " +
             "where id = #{id}")
     int updateContent(int id, String content);
-
-    @Update("update work " +
-            "set laud = laud + #{num} " +
-            "where id = #{id}")
-    int updateLaud(int id, int num);
-
-    @Update("update work " +
-            "set store = store + #{num} " +
-            "where id = #{id}")
-    int updateStore(int id, int num);
 
     @Update("update work " +
             "set tag = #{tag} " +
@@ -44,6 +39,16 @@ public interface WorkMapper {
             "set state = #{state} " +
             "where id = #{id}")
     int updateState(int id, int state);
+
+    @Update("update work " +
+            "set laud = laud + #{num} " +
+            "where id = #{id}")
+    int updateLaud(int id, int num);
+
+    @Update("update work " +
+            "set store = store + #{num} " +
+            "where id = #{id}")
+    int updateStore(int id, int num);
 
     @Select("select * " +
             "from work " +
@@ -72,4 +77,9 @@ public interface WorkMapper {
             "from work " +
             "where tag like '%${tag}%'")
     List<Work> searchByTag(String tag);
+
+    @Select("select * " +
+            "from work " +
+            "where title like '%${title}%'")
+    List<Work> searchByTitle(String title);
 }

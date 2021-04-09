@@ -158,10 +158,12 @@ public class WorkService {
      * @param id 作品ID
      * @param content 作品内容
      * @param tag 作品标签
+     * @param title 作品标题
      */
-    public void update(int id, String content, String tag) {
+    public void update(int id, String content, String tag, String title) {
         workMapper.updateContent(id, content);
         workMapper.updateTag(id, tag);
+        workMapper.updateTitle(id, title);
     }
 
     /**
@@ -190,4 +192,12 @@ public class WorkService {
         return workMapper.searchByTag(tag);
     }
 
+    /**
+     * 通过标题搜索作品
+     * @param title 标题
+     * @return 作品列表
+     */
+    public List<Work> searchByTitle(String title) {
+        return workMapper.searchByTitle(title);
+    }
 }
