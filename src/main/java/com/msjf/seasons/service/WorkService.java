@@ -129,6 +129,14 @@ public class WorkService {
     }
 
     /**
+     * 举报作品
+     * @param id 作品ID
+     */
+    public void report(int id) {
+        workMapper.updateState(id, 1);
+    }
+
+    /**
      * 创作
      * @param work 作品信息
      * @param file 文件

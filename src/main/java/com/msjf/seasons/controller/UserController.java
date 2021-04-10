@@ -32,14 +32,17 @@ public class UserController {
         u.setBirthday(logService.strToDate(birthday));
         u.setSpace(space);
         u.setSign(sign);
+        logService.log(name, "User " + name + " has modified information");
         return userService.updateInfo(u) ? "0" : "1";
     }
 
     @PostMapping("/my/password")
     public String modifyInfo(@RequestParam("old") String oldP, @RequestParam("new") String newP, HttpSession session) {
         int id = (int)session.getAttribute("id");
-        if (userService.select(id).getPassword().equals(oldP)) {
+        User u = userService.select(id);
+        if (u.getPassword().equals(oldP)) {
             userService.updatePassword(id, newP);
+            logService.log(u.getName(), "User " + u.getName() + " has modified password");
             return "0";
         }
         return "1";
@@ -48,7 +51,7 @@ public class UserController {
     @GetMapping({"/my/info", "/my"})
     public Map<String, User> getMyInfo(HttpSession session) {
         Map<String, User> result = new HashMap<>();
-        result.put("list", userService.select((int)session.getAttribute("id")));
+        result.put("user", userService.select((int)session.getAttribute("id")));
         return result;
     }
 

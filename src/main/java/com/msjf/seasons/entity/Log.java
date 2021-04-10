@@ -3,16 +3,16 @@ package com.msjf.seasons.entity;
 import java.sql.Timestamp;
 
 public class Log {
-    private String uname;
+    private String name;
     private Timestamp daytime;
     private String content;
 
-    public String getUname() {
-        return uname;
+    public String getName() {
+        return name;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Timestamp getDaytime() {
@@ -34,7 +34,7 @@ public class Log {
     @Override
     public String toString() {
         return "Log{" +
-                "name='" + uname + '\'' +
+                "name='" + name + '\'' +
                 ", daytime=" + daytime +
                 ", content='" + content + '\'' +
                 '}';

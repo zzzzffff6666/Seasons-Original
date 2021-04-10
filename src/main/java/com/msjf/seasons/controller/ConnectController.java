@@ -3,6 +3,7 @@ package com.msjf.seasons.controller;
 import com.msjf.seasons.entity.Operator;
 import com.msjf.seasons.entity.User;
 import com.msjf.seasons.service.ConnectService;
+import com.msjf.seasons.service.LogService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,8 @@ public class ConnectController {
 
     @Resource
     private ConnectService connectService;
+    @Resource
+    private LogService logService;
 
     @PostMapping("/login")
     public String userLogin(@RequestParam("name") String name, @RequestParam("password") String password, HttpSession session) {
@@ -27,17 +30,19 @@ public class ConnectController {
         if (u != null && u.getPassword().equals(password)) {
             session.setAttribute("type", 0);
             session.setAttribute("id", u.getId());
+            session.setAttribute("name", u.getName());
             return "0";
         }
         return "1";
     }
 
-    @PostMapping("/oplogin")
+    @PostMapping("/opLogin")
     public String opLogin(@RequestParam("name") String name, @RequestParam("password") String password, HttpSession session) {
         Operator op = connectService.opSearch(name);
         if (op != null && op.getPassword().equals(password)) {
             session.setAttribute("type", 1);
             session.setAttribute("id", op.getId());
+            session.setAttribute("name", op.getName());
             return "0";
         }
         return "1";
@@ -46,7 +51,11 @@ public class ConnectController {
     @PostMapping("/register")
     public String userRegister(@RequestParam("name") String name, @RequestParam("password") String password,
                                @RequestParam("email") String email) {
-        return connectService.register(name, password, email) ? "0" : "1";
+        if (connectService.register(name, password, email)) {
+            logService.log(name, "User " + name + " has already registered");
+            return "0";
+        }
+        return "1";
     }
 
 }

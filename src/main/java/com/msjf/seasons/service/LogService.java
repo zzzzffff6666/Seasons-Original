@@ -18,13 +18,13 @@ public class LogService {
 
     /**
      * 记录日志
-     * @param uname 用户名
+     * @param name 用户名
      * @param content 具体内容
      * @return 是否成功
      */
-    public boolean log(String uname, String content) {
+    public boolean log(String name, String content) {
         Log log = new Log();
-        log.setUname(uname);
+        log.setName(name);
         log.setDaytime(new Timestamp(System.currentTimeMillis()));
         log.setContent(content);
         return logMapper.insert(log) == 1;
@@ -32,10 +32,10 @@ public class LogService {
 
     /**
      * 获取关于某一用户的日志
-     * @param uname 用户名
+     * @param name 用户名
      */
-    public void printUserLog(String uname) {
-        List<Log> logs = logMapper.select(uname);
+    public void printUserLog(String name) {
+        List<Log> logs = logMapper.select(name);
         System.out.println("********** Print Start **********");
         for (Log l : logs) {
             System.out.println(l);

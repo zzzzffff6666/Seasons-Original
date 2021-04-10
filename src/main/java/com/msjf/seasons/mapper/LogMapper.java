@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface LogMapper {
     @Insert("insert into " +
-            "log(uname, daytime, content) " +
-            "values(#{uname}, #{daytime}, #{content})")
+            "log(name, daytime, content) " +
+            "values(#{name}, #{daytime}, #{content})")
     int insert(Log log);
 
     @Select("select * " +
             "from log " +
-            "where uname = #{uname}")
-    List<Log> select(String uname);
+            "where name = #{name}")
+    List<Log> select(String name);
 
     @Select("select * " +
             "from log " +
