@@ -24,8 +24,8 @@ public class WorkController {
     private LogService logService;
 
     @PostMapping("/compose")
-    public String createWork(@RequestParam("work") String json,
-                             @RequestParam("file") MultipartFile file, HttpSession session) throws Exception {
+    public String createWork(@RequestParam("work") String json, @RequestParam("file") MultipartFile file,
+                             HttpSession session) throws Exception {
         int uid = (int)session.getAttribute("id");
         String name = (String)session.getAttribute("name");
 
@@ -45,7 +45,7 @@ public class WorkController {
 
         int wid = workService.compose(w, file);
         if (wid != 0) {
-            logService.log(name, "User " + name + " has create work " + wid);
+            logService.log(0, "User " + name + " has create work " + wid);
             return "0";
         }
 
@@ -87,7 +87,7 @@ public class WorkController {
     public void report(@RequestParam("id") int wid, HttpSession session) {
         String name = (String)session.getAttribute("name");
         workService.report(wid);
-        logService.log(name, "User " + name + " has reported work " + wid);
+        logService.log(0, "User " + name + " has reported work " + wid);
     }
 
     @PostMapping("/my/work/delete")
@@ -96,7 +96,7 @@ public class WorkController {
         String name = (String)session.getAttribute("name");
         if (uid == workService.searchByID(wid).getUid()) {
             workService.delete(wid);
-            logService.log(name, "User " + name + " has delete work " + wid);
+            logService.log(0, "User " + name + " has delete work " + wid);
             return "0";
         }
         return "1";

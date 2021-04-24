@@ -18,43 +18,34 @@ public class LogService {
 
     /**
      * 记录日志
-     * @param name 用户名
+     * @param type 事件类别：用户，管理员，杂志社
      * @param content 具体内容
-     * @return 是否成功
      */
-    public boolean log(String name, String content) {
+    public void log(int type, String content) {
         Log log = new Log();
-        log.setName(name);
+        log.setType(type);
         log.setDaytime(new Timestamp(System.currentTimeMillis()));
         log.setContent(content);
-        return logMapper.insert(log) == 1;
+        logMapper.insert(log);
     }
 
     /**
-     * 获取关于某一用户的日志
-     * @param name 用户名
+     * 获取关于某一类别的日志
+     * @param type 日志类别
+     * @return 日志列表
      */
-    public void printUserLog(String name) {
-        List<Log> logs = logMapper.select(name);
-        System.out.println("********** Print Start **********");
-        for (Log l : logs) {
-            System.out.println(l);
-        }
-        System.out.println("********** Print End **********");
+    public List<Log> printUserLog(int type) {
+        return logMapper.selectByType(type);
     }
 
     /**
      * 获取某一时间段的日志
      * @param begin 开始时间
      * @param end 结束时间
+     * @return 日志列表
      */
-    public void printTimeLog(Timestamp begin, Timestamp end) {
-        List<Log> logs = logMapper.selectByTime(begin, end);
-        System.out.println("********** Print Start **********");
-        for (Log l : logs) {
-            System.out.println(l);
-        }
-        System.out.println("********** Print End **********");
+    public List<Log> printTimeLog(Timestamp begin, Timestamp end) {
+        return logMapper.selectByTime(begin, end);
     }
 
     /**

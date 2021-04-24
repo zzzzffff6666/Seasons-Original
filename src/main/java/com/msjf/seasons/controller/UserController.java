@@ -32,7 +32,7 @@ public class UserController {
         u.setBirthday(logService.strToDate(birthday));
         u.setSpace(space);
         u.setSign(sign);
-        logService.log(name, "User " + name + " has modified information");
+        logService.log(0, "User " + name + " has modified information");
         return userService.updateInfo(u) ? "0" : "1";
     }
 
@@ -42,7 +42,7 @@ public class UserController {
         User u = userService.select(id);
         if (u.getPassword().equals(oldP)) {
             userService.updatePassword(id, newP);
-            logService.log(u.getName(), "User " + u.getName() + " has modified password");
+            logService.log(0, "User " + u.getName() + " has modified password");
             return "0";
         }
         return "1";

@@ -33,8 +33,8 @@ public class OperatorController {
     public String checkWork(@RequestParam("id") int id, @RequestParam("state") int state, HttpSession session) {
         if ((int)session.getAttribute("type") == 1) {
             String name = (String)session.getAttribute("name");
-            logService.log(name,
-                    "Operator " + name + " has checked work " + id + ", opinion: " + (state == 0 ? "Keep" : "Delete"));
+            logService.log(1,
+                    "Admin " + name + " has checked work " + id + ", opinion: " + (state == 0 ? "Keep" : "Delete"));
             workService.check(id, state);
             return "0";
         }

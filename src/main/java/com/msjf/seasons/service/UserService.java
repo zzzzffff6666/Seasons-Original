@@ -31,6 +31,26 @@ public class UserService {
     }
 
     /**
+     * 获取金币
+     * @param id 用户id
+     * @param change 数量
+     * @return 是否成功
+     */
+    public boolean getCoin(int id, float change) {
+        return userMapper.updateCoin(id, change) == 1;
+    }
+
+    /**
+     * 使用金币
+     * @param id 用户id
+     * @param change 数量
+     * @return 是否成功
+     */
+    public boolean useCoin(int id, float change) {
+        return userMapper.updateCoin(id, -change) == 1;
+    }
+
+    /**
      * 查询用户信息
      * @param id 用户ID
      * @return 用户信息

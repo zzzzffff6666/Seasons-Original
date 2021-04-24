@@ -19,7 +19,9 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(
                 "/login",
                 "/register",
-                "/oplogin",
+                "/adLogin",
+                "/magLogin",
+                "magRegister",
                 "/img/**",
                 "/css/**",
                 "/js/**",
