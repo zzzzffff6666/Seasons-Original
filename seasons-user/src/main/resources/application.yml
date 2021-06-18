@@ -1,0 +1,37 @@
+server:
+  port: 8106
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/
+
+mybatis:
+  type-aliases-package: com.zhang.seasonsuser.model
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+spring:
+  application:
+    name: seasons-user
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seasons?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: zhangfu
+    password: 1109039190
+
+  redis:
+    database: 0   # Redis数据库索引（默认为0）
+    host: 8.136.6.74  # Redis服务器地址
+    port: 6379         # Redis服务器连接端口
+    password: 1109039190    # Redis服务器连接密码（默认为空）
+    timeout: 5000  # 连接超时时间（毫秒）
+    jedis:
+      pool:
+        max-idle: 10    # 连接池中的最大空闲连接
+        max-active: 10 # 连接池最大连接数（使用负值表示没有限制）
+        min-idle: 0     # 连接池中的最小空闲连接

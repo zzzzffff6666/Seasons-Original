@@ -1,0 +1,62 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://localhost:8100/eureka/
+
+
+spring:
+  application:
+    name: seasons-gateway
+
+  redis:
+    database: 0   # Redis数据库索引（默认为0）
+    host: 8.136.6.74  # Redis服务器地址
+    port: 6379         # Redis服务器连接端口
+    password: 1109039190    # Redis服务器连接密码（默认为空）
+    timeout: 5000  # 连接超时时间（毫秒）
+    jedis:
+      pool:
+        max-idle: 10    # 连接池中的最大空闲连接
+        max-active: 10 # 连接池最大连接数（使用负值表示没有限制）
+        min-idle: 0     # 连接池中的最小空闲连接
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: seasons-admin
+          uri: http://localhost:8104
+          predicates:
+            - Path=/admin/**
+        - id: seasons-mag
+          uri: http://localhost:8105
+          predicates:
+            - Path=/mag/**
+        - id: seasons-user
+          uri: http://localhost:8106
+          predicates:
+            - Path=/user/**
+        - id: seasons-work
+          uri: http://localhost:8107
+          predicates:
+            - Path=/pay/**,/free/**,/square,/square/**,/work/**,/index
+
+management:
+  endpoint:
+    health:
+      enabled: true
+
+url:
+  white: /static/**,/login,/register/**,free/**,/pay/**,
